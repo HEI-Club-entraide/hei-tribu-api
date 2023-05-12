@@ -1,5 +1,5 @@
 CREATE TABLE if not exists "user" (
-    id varchar primary key;
+    id varchar primary key,
     first_name varchar(20),
     last_name varchar(20),
     username varchar(10),
