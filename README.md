@@ -13,6 +13,18 @@ Welcome to this inter-student project at HEI, this is the back-end of the projec
     <li>if you are using another editor use the maven commands (mvn) to take the dependencies.</li>
 </ul>
 
+### Configuration and setup your database for coding:
+
+you have two choices for setting up your database:
+
+1. Use the application.properties in
+
+```
+src/main/resources/application.properties
+```
+
+2. Use the run modification by intelliJ
+
 ### The schemas of database:
 <div width="150" height="150">
     <img src="docs/hei-tribu-database.png" />
