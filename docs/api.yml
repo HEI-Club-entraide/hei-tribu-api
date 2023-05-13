@@ -1,0 +1,260 @@
+openapi: 3.0.0
+info:
+  version: "latest"
+  title: HEI - tribu
+paths:
+  /users:
+    get:
+      parameters:
+        - name: page
+          in: query
+          required: true
+        - name: page_size
+          in: query
+          required: true
+      tags:
+        - Users
+      summary: get all users
+      operationId: getUsers
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Users'
+    put:
+      tags:
+        - Users
+      summary: create or update users
+      operationId: createUsers
+      requestBody:
+        description: Update or create if not exists users
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateUers'
+      responses:
+        '200':
+          description: List of users created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Users'
+  /groups:
+    get:
+      parameters:
+        - name: page
+          in: query
+          required: true
+        - name: page_size
+          in: query
+          required: true
+      tags:
+        - Groups
+      summary: get all groups
+      operationId: getGroups
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Groups'
+    put:
+      tags:
+        - Groups
+      summary: create or update groups
+      operationId: updateGroups
+      requestBody:
+        description: Update or create if not exists users
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateGroups'
+      responses:
+        '200':
+          description: List of groups created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Groups'
+  /promotions:
+    get:
+      parameters:
+        - name: page
+          in: query
+          required: true
+        - name: page_size
+          in: query
+          required: true
+      tags:
+        - Promotions
+      summary: get all promotions
+      operationId: getPromotions
+      responses:
+        '200':
+          description: List of promotions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Promotions'
+    put:
+      tags:
+        - Promotions
+      summary: create or update promotions
+      operationId: updatePromotions
+      requestBody:
+        description: Update or create if not exists promotions
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreatePromotion'
+      responses:
+        '200':
+          description: List of groups created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Promotions'
+
+
+components:
+  schemas:
+    CreateUers:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        first_name:
+          type: string
+        last_name:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum:
+            - STUDENT
+            - TEACHER
+        gender:
+          type: string
+          enum:
+            - H
+            - F
+        avatar_link:
+          type: string
+        birthdate:
+          type: string
+        group:
+          type: string
+          example:
+            "group_id"
+    Users:
+      type: object
+      properties:
+        id:
+          type: number
+        first_name:
+          type: string
+        last_name:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum:
+            - STUDENT
+            - TEACHER
+        gender:
+          type: string
+          enum:
+            - H
+            - F
+        avatar_link:
+          type: string
+        birthdate:
+          type: string
+        group:
+          type: string
+          example:
+            "group_name"
+    Groups:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        promotion:
+          $ref: "#/components/schemas/Promotions"
+    CreateGroups:
+      type: object
+      properties:
+        id:
+          type: string
+          required: false
+        name:
+          type: string
+        promotion:
+          type: string
+          example:
+            "promotion_id"
+    Promotions:
+      type: object
+      properties:
+        id:
+          type: string
+        enter_date:
+          type: string
+        exit_date:
+          type: string
+        name:
+          type: string
+        promotion_photo:
+          type: string
+    CreatePromotion:
+      type: object
+      properties:
+        id:
+          type: string
+          required: false
+        enter_date:
+          type: string
+        exit_date:
+          type: string
+        name:
+          type: string
+        promotion_photo:
+          type: string
+          nullable: true
