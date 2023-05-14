@@ -25,13 +25,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Users'
-    put:
+    post:
       tags:
         - Users
-      summary: create or update users
+      summary: create users
       operationId: createUsers
       requestBody:
-        description: Update or create if not exists users
+        description: create users
         required: true
         content:
           application/json:
@@ -70,13 +70,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Groups'
-    put:
+    post:
       tags:
         - Groups
-      summary: create or update groups
-      operationId: updateGroups
+      summary: create groups
+      operationId: createUsers
       requestBody:
-        description: Update or create if not exists users
+        description: create users
         required: true
         content:
           application/json:
@@ -115,13 +115,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Promotions'
-    put:
+    post:
       tags:
         - Promotions
-      summary: create or update promotions
-      operationId: updatePromotions
+      summary: create promotions
+      operationId: createPromotions
       requestBody:
-        description: Update or create if not exists promotions
+        description: Create promotions
         required: true
         content:
           application/json:
@@ -145,9 +145,6 @@ components:
     CreateUers:
       type: object
       properties:
-        id:
-          type: string
-          nullable: true
         first_name:
           type: string
         last_name:
@@ -221,9 +218,6 @@ components:
     CreateGroups:
       type: object
       properties:
-        id:
-          type: string
-          required: false
         name:
           type: string
         promotion:
@@ -246,9 +240,6 @@ components:
     CreatePromotion:
       type: object
       properties:
-        id:
-          type: string
-          required: false
         enter_date:
           type: string
         exit_date:
