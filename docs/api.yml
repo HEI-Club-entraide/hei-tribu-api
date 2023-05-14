@@ -25,13 +25,23 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Users'
-    post:
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+    put:
       tags:
         - Users
-      summary: create users
-      operationId: createUsers
+      summary: crupdate users
+      operationId: crupdateUsers
       requestBody:
-        description: create users
+        description: crupdate users
         required: true
         content:
           application/json:
@@ -48,6 +58,16 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Users'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
   /groups:
     get:
       parameters:
@@ -70,13 +90,23 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Groups'
-    post:
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+    put:
       tags:
         - Groups
-      summary: create groups
-      operationId: createUsers
+      summary: crupdate groups
+      operationId: crupdateGroups
       requestBody:
-        description: create users
+        description: crupdate users
         required: true
         content:
           application/json:
@@ -93,6 +123,16 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Groups'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
   /promotions:
     get:
       parameters:
@@ -115,13 +155,23 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Promotions'
-    post:
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+    put:
       tags:
         - Promotions
-      summary: create promotions
-      operationId: createPromotions
+      summary: crupdate promotions
+      operationId: crupdatePromotions
       requestBody:
-        description: Create promotions
+        description: Crupdate promotions
         required: true
         content:
           application/json:
@@ -138,13 +188,94 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Promotions'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
 
 
 components:
+  responses:
+    '400':
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestException'
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotAuthorizedException'
+    '404':
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourceNotFoundException'
+    '429':
+      description: Too many requests to the API
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TooManyRequestsException'
+    '500':
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InternalServerException'
   schemas:
+    Exception:
+      type: object
+      properties:
+        type:
+          type: string
+        message:
+          type: string
+    BadRequestException:
+        allOf:
+          - $ref: '#/components/schemas/Exception'
+        example:
+          type: BadRequestException
+          message: Bad request
+    NotAuthorizedException:
+        allOf:
+          - $ref: '#/components/schemas/Exception'
+        example:
+          type: NotAuthorizedException
+          message: Not authorized
+    ResourceNotFoundException:
+        allOf:
+          - $ref: '#/components/schemas/Exception'
+        example:
+          type: ResourceNotFoundException
+          message: Resource of type <T> identified by <I> not found
+    TooManyRequestsException:
+        allOf:
+          - $ref: '#/components/schemas/Exception'
+        example:
+          type: TooManyRequestsException
+          message: Too many requests
+    InternalServerException:
+        allOf:
+          - $ref: '#/components/schemas/Exception'
+        example:
+          type: InternalServerException
+          message: Unexpected error
     CreateUers:
       type: object
       properties:
+        id:
+          type: string
+          required: false
         first_name:
           type: string
         last_name:
@@ -218,6 +349,9 @@ components:
     CreateGroups:
       type: object
       properties:
+        id:
+          type: string
+          required: false
         name:
           type: string
         promotion:
@@ -240,6 +374,9 @@ components:
     CreatePromotion:
       type: object
       properties:
+        id:
+          type: string
+          required: false
         enter_date:
           type: string
         exit_date:
