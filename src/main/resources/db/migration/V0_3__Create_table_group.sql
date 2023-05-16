@@ -1,6 +1,6 @@
 CREATE TABLE if not exists "group" (
-    id_group varchar primary key,
-    promotion_id varchar references promotion(id_promotion),
+    id_group uuid primary key default uuid_generate_v4(),
+    promotion_id uuid references promotion(id_promotion),
     name varchar,
     group_photo varchar
 );
