@@ -7,5 +7,5 @@ CREATE TABLE if not exists "user" (
     email varchar,
     role role,
     gender gender,
-    avatar_link varchar
+    user_photo varchar
 );
