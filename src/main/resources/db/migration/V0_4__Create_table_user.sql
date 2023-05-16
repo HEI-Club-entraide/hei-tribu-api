@@ -1,11 +1,13 @@
 CREATE TABLE if not exists "user" (
-    id varchar primary key,
-    first_name varchar(20),
-    last_name varchar(20),
-    username varchar(10),
+    id uuid primary key default uuid_generate_v4(),
+    group_id uuid references "group"(id),
+    first_name varchar,
+    last_name varchar,
+    username varchar,
     password varchar,
     email varchar,
     role role,
     gender gender,
-    avatar_link varchar
+    user_profile_picture varchar,
+    birthdate timestamp
 );

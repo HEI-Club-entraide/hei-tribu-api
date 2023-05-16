@@ -5,6 +5,13 @@ info:
 paths:
   /users:
     get:
+      parameters:
+        - name: page
+          in: query
+          required: true
+        - name: page_size
+          in: query
+          required: true
       tags:
         - Users
       summary: get all users
@@ -17,270 +24,287 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Sponsor'
-    post:
-      tags:
-        - Sponsors
-      summary: create sponsors
-      operationId: createSponsor
-      responses:
-        '200':
-          description: List of sponsors created
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CreateSponsor'
-  /matchs:
-    get:
-      tags:
-        - Matchs
-      summary: get all matchs
-      operationId: getMatchs
-      responses:
-        '200':
-          description: List of matchs
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Match'
-        '500':
-          description: Internal server error
-    post:
-      tags:
-        - Matchs
-      summary: create new matchs
-      operationId: createMatchs
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateMatch'
-      responses:
-        '200':
-          description: List of created books
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Match'
-        '500':
-          description: Internal server error
-    put:
-      tags:
-        - Matchs
-      summary: update some matchs
-      operationId: updateMatch
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Match'
-      responses:
-        '200':
-          description: List of updated match
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Match'
-        '500':
-          description: Internal server error
-  /match/{match_id}:
-    delete:
-      tags:
-        - Matchs
-      summary: delete a Specific match
-      operationId: deleteMatch
-      parameters:
-        - in: path
-          name: match_id
-          schema:
-            type: integer
-          required: true
-      responses:
-        '200':
-          description: Return the deleted match
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Match'
-        '500':
-          description: Internal server error
-  /teams:
-    get:
-      tags:
-        - Teams
-      summary: get all teams
-      operationId: getTeams
-      responses:
-        '200':
-          description: List of teams
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Team'
-    post:
-      tags:
-        - Teams
-      summary: create some teams
-      operationId: createTeams
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/CreateTeam'
-      responses:
-        '200':
-          description: List of created Teams
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Team'
-        '500':
-          description: Internal server error
-    put:
-      tags:
-        - Teams
-      summary: Update some teams
-      operationId: updateTeam
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/Team'
-      responses:
-        '200':
-          description: List of updated Teams
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Team'
-        '500':
-          description: Internal server error
-  /team/{team_id}:
-    delete:
-      tags:
-        - Teams
-      summary: delete a team
-      operationId: deleteTeam
-      responses:
-        '200':
-          description: return the team deleted
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Team'
+                  $ref: '#/components/schemas/Users'
+        '400':
+          $ref: '#/components/responses/400'
         '403':
-          description: not found
-  /players:
-    get:
-      tags:
-        - Players
-      summary: get all players
-      operationId: getPlayers
-      responses:
-        '200':
-          description: List of players
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Player'
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
         '500':
-          description: Internal server error
-    post:
-      tags:
-        - Players
-      summary: create new players
-      operationId: createPlayers
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/CreatePlayer'
-      responses:
-        '200':
-          description: List of created players
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Player'
-        '500':
-          description: Internal server error
+          $ref: '#/components/responses/500'
     put:
       tags:
-        - Players
-      summary: update some player
-      operationId: updatePlayer
+        - Users
+      summary: crupdate users
+      operationId: crupdateUsers
       requestBody:
+        description: crupdate users
+        required: true
         content:
           application/json:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/UpdatePlayers'
+                $ref: '#/components/schemas/CreateUers'
       responses:
         '200':
-          description: List of updated authors
+          description: List of users created
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Player'
+                  $ref: '#/components/schemas/Users'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
         '500':
-          description: Internal server error
-  /players/{player_id}:
-    delete:
-      tags:
-        - Players
-      summary: delete a Specific player
-      operationId: deletePlayer
+          $ref: '#/components/responses/500'
+  /groups:
+    get:
       parameters:
-        - in: path
-          name: player_id
-          schema:
-            type: integer
+        - name: page
+          in: query
           required: true
+        - name: page_size
+          in: query
+          required: true
+      tags:
+        - Groups
+      summary: get all groups
+      operationId: getGroups
       responses:
         '200':
-          description: Return the deleted player
+          description: List of users
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Player'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Groups'
+        '400':
+          $ref: '#/components/responses/400'
         '403':
-          description: Not found
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+    put:
+      tags:
+        - Groups
+      summary: crupdate groups
+      operationId: crupdateGroups
+      requestBody:
+        description: crupdate users
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateGroups'
+      responses:
+        '200':
+          description: List of groups created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Groups'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+  /promotions:
+    get:
+      parameters:
+        - name: page
+          in: query
+          required: true
+        - name: page_size
+          in: query
+          required: true
+      tags:
+        - Promotions
+      summary: get all promotions
+      operationId: getPromotions
+      responses:
+        '200':
+          description: List of promotions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Promotions'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+    put:
+      tags:
+        - Promotions
+      summary: crupdate promotions
+      operationId: crupdatePromotions
+      requestBody:
+        description: Crupdate promotions
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreatePromotion'
+      responses:
+        '200':
+          description: List of groups created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Promotions'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+
 components:
+  responses:
+    '400':
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestException'
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotAuthorizedException'
+    '404':
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourceNotFoundException'
+    '429':
+      description: Too many requests to the API
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TooManyRequestsException'
+    '500':
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InternalServerException'
   schemas:
-    CreateSponsor:
+    Exception:
       type: object
       properties:
-        name:
+        type:
           type: string
-    Sponsor:
+        message:
+          type: string
+    BadRequestException:
+        allOf:
+          - $ref: '#/components/schemas/Exception'
+        example:
+          type: BadRequestException
+          message: Bad request
+    NotAuthorizedException:
+        allOf:
+          - $ref: '#/components/schemas/Exception'
+        example:
+          type: NotAuthorizedException
+          message: Not authorized
+    ResourceNotFoundException:
+        allOf:
+          - $ref: '#/components/schemas/Exception'
+        example:
+          type: ResourceNotFoundException
+          message: Resource of type <T> identified by <I> not found
+    TooManyRequestsException:
+        allOf:
+          - $ref: '#/components/schemas/Exception'
+        example:
+          type: TooManyRequestsException
+          message: Too many requests
+    InternalServerException:
+        allOf:
+          - $ref: '#/components/schemas/Exception'
+        example:
+          type: InternalServerException
+          message: Unexpected error
+    CreateUers:
+      type: object
+      properties:
+        id:
+          type: string
+          required: false
+        first_name:
+          type: string
+        last_name:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum:
+            - STUDENT
+            - TEACHER
+        gender:
+          type: string
+          enum:
+            - H
+            - F
+        user_profile_picture:
+          type: string
+        birthdate:
+          type: string
+        group:
+          type: string
+          example:
+            "group_id"
+    Users:
       type: object
       properties:
         id:
@@ -293,109 +317,72 @@ components:
           type: string
         password:
           type: string
-    CreateTeam:
-      type: object
-      properties:
-        name:
+        email:
           type: string
-    Team:
-      type: object
-      properties:
-        id:
-          type: number
-        name:
+        role:
           type: string
-        players:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdatePlayers'
-        sponsors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Sponsor'
-    Match:
-      type: object
-      properties:
-        id:
-          type: number
-        dateTime:
+          enum:
+            - STUDENT
+            - TEACHER
+        gender:
           type: string
-        teamOne:
-          items:
-            $ref: '#/components/schemas/Team'
-        teamTwo:
-          items:
-            $ref: '#/components/schemas/Team'
-        stadium:
+          enum:
+            - H
+            - F
+        user_profile_picture:
           type: string
-        score:
+        birthdate:
           type: string
-          example: 3:2
-        scorers:
-          items:
-            $ref: '#/components/schemas/Scorers'
-    Scorers:
+        group:
+          type: string
+          example:
+            "group_name"
+    Groups:
       type: object
       properties:
         id:
-          type: number
-        time:
           type: string
-        CSC:
-          type: boolean
-        team_one:
-          items:
-            $ref: '#/components/schemas/Player'
-        team_two:
-          items:
-            $ref: '#/components/schemas/Player'
-    CreateMatch:
-      type: object
-      properties:
-        dateTime:
+        name:
           type: string
-        stadium:
-          type: string
-        teamOne:
-          items:
-            $ref: '#/components/schemas/Team'
-        teamTwo:
-          items:
-            $ref: '#/components/schemas/Team'
-    Player:
+        promotion:
+          $ref: "#/components/schemas/Promotions"
+    CreateGroups:
       type: object
       properties:
         id:
-          type: number
+          type: string
+          required: false
         name:
           type: string
-    UpdatePlayers:
+        promotion:
+          type: string
+          example:
+            "promotion_id"
+    Promotions:
       type: object
       properties:
         id:
-          type: number
+          type: string
+        promotion_begin:
+          type: string
+        promotion_end:
+          type: string
         name:
           type: string
-        number:
-          type: number
-        team:
-          type: object
-          properties:
-            id:
-              type: integer
-            name:
-              type: string
-    CreatePlayer:
+        promotion_picture:
+          type: string
+    CreatePromotion:
       type: object
       properties:
+        id:
+          type: string
+          required: false
+        promotion_begin:
+          type: string
+        promotion_end:
+          type: string
         name:
           type: string
-        number:
-          type: number
-        team:
-          type: object
-          properties:
-            id:
-              type: integer
-            name:
-              type: string
+        promotion_picture:
+          type: string
+          nullable: true
