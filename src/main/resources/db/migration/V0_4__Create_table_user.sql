@@ -8,5 +8,6 @@ CREATE TABLE if not exists "user" (
     email varchar,
     role role,
     gender gender,
-    user_profile_picture varchar
+    user_profile_picture varchar,
+    birthdate timestamp
 );
