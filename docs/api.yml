@@ -296,7 +296,7 @@ components:
           enum:
             - H
             - F
-        avatar_link:
+        user_profile_picture:
           type: string
         birthdate:
           type: string
@@ -329,7 +329,7 @@ components:
           enum:
             - H
             - F
-        avatar_link:
+        user_profile_picture:
           type: string
         birthdate:
           type: string
@@ -363,13 +363,13 @@ components:
       properties:
         id:
           type: string
-        enter_date:
+        promotion_begin:
           type: string
-        exit_date:
+        promotion_end:
           type: string
         name:
           type: string
-        promotion_photo:
+        promotion_picture:
           type: string
     CreatePromotion:
       type: object
@@ -377,12 +377,12 @@ components:
         id:
           type: string
           required: false
-        enter_date:
+        promotion_begin:
           type: string
-        exit_date:
+        promotion_end:
           type: string
         name:
           type: string
-        promotion_photo:
+        promotion_picture:
           type: string
           nullable: true
