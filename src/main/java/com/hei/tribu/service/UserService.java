@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -19,6 +20,7 @@ public class UserService {
     //Get mapping
     public List<User> getUsers(Page page, PageSize pageSize){
         Pageable pageable = PageRequest.of(page.getValue() - 1, pageSize.getValue());
-        return repository.findAll(pageable).toList();
+        return repository.findAll(pageable).stream()
+                .collect(Collectors.toUnmodifiableList());
     }
 }
