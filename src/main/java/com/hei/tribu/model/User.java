@@ -7,6 +7,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -14,6 +18,10 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "\"user\"")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements Serializable {
     @Id
     @GeneratedValue
@@ -36,7 +44,7 @@ public class User implements Serializable {
 
     private Gender gender;
 
-    private String userProfile;
+    private String userProfilePicture;
 
     private Instant birthdate;
 }

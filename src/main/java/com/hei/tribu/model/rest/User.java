@@ -4,11 +4,17 @@ import com.hei.tribu.model.type.Gender;
 import com.hei.tribu.model.type.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.Instant;
 
 @AllArgsConstructor
 @Builder
+@Getter
+@Setter
+@NoArgsConstructor
 public class User {
     private String firstName;
     private String lastName;
