@@ -1,5 +1,6 @@
 package com.hei.tribu.model.rest;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hei.tribu.model.type.Gender;
 import com.hei.tribu.model.type.Role;
 import lombok.AllArgsConstructor;
@@ -16,14 +17,17 @@ import java.time.Instant;
 @Setter
 @NoArgsConstructor
 public class User {
+    @JsonProperty("first_name")
     private String firstName;
+    @JsonProperty("last_name")
     private String lastName;
     private String username;
     private String password;
     private String email;
     private Role role;
     private Gender gender;
+    @JsonProperty("user_profile_picture")
     private String userProfilePicture;
     private Instant birthdate;
-    private String groupName;
+    private String group;
 }
