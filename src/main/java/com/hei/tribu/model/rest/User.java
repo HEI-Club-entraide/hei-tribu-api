@@ -17,6 +17,7 @@ import java.time.Instant;
 @Setter
 @NoArgsConstructor
 public class User {
+    private String id;
     @JsonProperty("first_name")
     private String firstName;
     @JsonProperty("last_name")

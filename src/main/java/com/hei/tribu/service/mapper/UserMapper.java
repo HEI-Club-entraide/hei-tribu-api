@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 public class UserMapper {
     public User toRest(com.hei.tribu.model.User domain){
         return User.builder()
+                .id(domain.getIdUser().toString())
                 .group(domain.getGroup().getName())
                 .birthdate(domain.getBirthdate())
                 .email(domain.getEmail())
