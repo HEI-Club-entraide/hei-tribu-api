@@ -21,7 +21,7 @@ import java.util.UUID;
 public class Group {
     @Id
     @GeneratedValue
-    private UUID idGroup;
+    private UUID id;
 
     @ManyToOne
     private Promotion promotion;

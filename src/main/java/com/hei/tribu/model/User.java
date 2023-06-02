@@ -25,7 +25,7 @@ import java.util.UUID;
 public class User implements Serializable {
     @Id
     @GeneratedValue
-    private UUID idUser;
+    private UUID id;
 
     @ManyToOne
     private Group group;
