@@ -23,4 +23,9 @@ public class UserService {
         return repository.findAll(pageable).stream()
                 .collect(Collectors.toUnmodifiableList());
     }
+
+    //Put mapping
+    public List<User> crUpdate(List<User> toSave){
+        return repository.saveAll(toSave);
+    }
 }
