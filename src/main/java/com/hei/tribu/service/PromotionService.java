@@ -23,4 +23,9 @@ public class PromotionService {
         return repository.findAll(pageable).stream()
                 .collect(Collectors.toUnmodifiableList());
     }
+
+    //Put mapping
+    public List<Promotion> crUpdate(List<Promotion> toSave){
+        return repository.saveAll(toSave);
+    }
 }

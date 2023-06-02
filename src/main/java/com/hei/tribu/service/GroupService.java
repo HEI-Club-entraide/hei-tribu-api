@@ -23,4 +23,8 @@ public class GroupService {
         return repository.findAll(pageable).stream()
                 .collect(Collectors.toUnmodifiableList());
     }
+
+    public List<Group> crUpdate(List<Group> toSave){
+        return repository.saveAll(toSave);
+    }
 }
