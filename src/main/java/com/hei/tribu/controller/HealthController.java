@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HealthController {
     @GetMapping("/hei")
     public String heiTribu(){
-        return "hei-tribu";
+        return "tribu";
     }
 }

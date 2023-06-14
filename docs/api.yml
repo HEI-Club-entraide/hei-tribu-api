@@ -1,0 +1,388 @@
+openapi: 3.0.0
+info:
+  version: "latest"
+  title: HEI - tribu
+paths:
+  /users:
+    get:
+      parameters:
+        - name: page
+          in: query
+          required: true
+        - name: page_size
+          in: query
+          required: true
+      tags:
+        - Users
+      summary: get all users
+      operationId: getUsers
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Users'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+    put:
+      tags:
+        - Users
+      summary: crupdate users
+      operationId: crupdateUsers
+      requestBody:
+        description: crupdate users
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateUers'
+      responses:
+        '200':
+          description: List of users created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Users'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+  /groups:
+    get:
+      parameters:
+        - name: page
+          in: query
+          required: true
+        - name: page_size
+          in: query
+          required: true
+      tags:
+        - Groups
+      summary: get all groups
+      operationId: getGroups
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Groups'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+    put:
+      tags:
+        - Groups
+      summary: crupdate groups
+      operationId: crupdateGroups
+      requestBody:
+        description: crupdate users
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateGroups'
+      responses:
+        '200':
+          description: List of groups created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Groups'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+  /promotions:
+    get:
+      parameters:
+        - name: page
+          in: query
+          required: true
+        - name: page_size
+          in: query
+          required: true
+      tags:
+        - Promotions
+      summary: get all promotions
+      operationId: getPromotions
+      responses:
+        '200':
+          description: List of promotions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Promotions'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+    put:
+      tags:
+        - Promotions
+      summary: crupdate promotions
+      operationId: crupdatePromotions
+      requestBody:
+        description: Crupdate promotions
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreatePromotion'
+      responses:
+        '200':
+          description: List of groups created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Promotions'
+        '400':
+          $ref: '#/components/responses/400'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+
+
+components:
+  responses:
+    '400':
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BadRequestException'
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotAuthorizedException'
+    '404':
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourceNotFoundException'
+    '429':
+      description: Too many requests to the API
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TooManyRequestsException'
+    '500':
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InternalServerException'
+  schemas:
+    Exception:
+      type: object
+      properties:
+        type:
+          type: string
+        message:
+          type: string
+    BadRequestException:
+        allOf:
+          - $ref: '#/components/schemas/Exception'
+        example:
+          type: BadRequestException
+          message: Bad request
+    NotAuthorizedException:
+        allOf:
+          - $ref: '#/components/schemas/Exception'
+        example:
+          type: NotAuthorizedException
+          message: Not authorized
+    ResourceNotFoundException:
+        allOf:
+          - $ref: '#/components/schemas/Exception'
+        example:
+          type: ResourceNotFoundException
+          message: Resource of type <T> identified by <I> not found
+    TooManyRequestsException:
+        allOf:
+          - $ref: '#/components/schemas/Exception'
+        example:
+          type: TooManyRequestsException
+          message: Too many requests
+    InternalServerException:
+        allOf:
+          - $ref: '#/components/schemas/Exception'
+        example:
+          type: InternalServerException
+          message: Unexpected error
+    CreateUers:
+      type: object
+      properties:
+        id:
+          type: string
+          required: false
+        first_name:
+          type: string
+        last_name:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum:
+            - STUDENT
+            - TEACHER
+        gender:
+          type: string
+          enum:
+            - H
+            - F
+        user_profile_picture:
+          type: string
+        birthdate:
+          type: string
+        group:
+          type: string
+          example:
+            "group_id"
+    Users:
+      type: object
+      properties:
+        id:
+          type: number
+        first_name:
+          type: string
+        last_name:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum:
+            - STUDENT
+            - TEACHER
+        gender:
+          type: string
+          enum:
+            - H
+            - F
+        user_profile_picture:
+          type: string
+        birthdate:
+          type: string
+        group:
+          type: string
+          example:
+            "group_name"
+    Groups:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        promotion:
+          $ref: "#/components/schemas/Promotions"
+    CreateGroups:
+      type: object
+      properties:
+        id:
+          type: string
+          required: false
+        name:
+          type: string
+        promotion:
+          type: string
+          example:
+            "promotion_id"
+    Promotions:
+      type: object
+      properties:
+        id:
+          type: string
+        promotion_begin:
+          type: string
+        promotion_end:
+          type: string
+        name:
+          type: string
+        promotion_picture:
+          type: string
+    CreatePromotion:
+      type: object
+      properties:
+        id:
+          type: string
+          required: false
+        promotion_begin:
+          type: string
+        promotion_end:
+          type: string
+        name:
+          type: string
+        promotion_picture:
+          type: string
+          nullable: true
