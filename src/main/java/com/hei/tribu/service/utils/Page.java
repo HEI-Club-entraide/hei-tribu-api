@@ -12,6 +12,6 @@ public class Page {
         if(value < 1){
             throw new BadRequestException("page must be >= to 1");
         }
-        this.value = value;
+        this.value = value - 1;
     }
 }
