@@ -16,9 +16,6 @@ public class PageSize {
         if(value > MAX_VALUE){
             throw new BadRequestException("page_size must be < " + MAX_VALUE);
         }
-        if(value == null){
-            this.value = MIN_VALUE;
-        }
         this.value = value;
     }
 }

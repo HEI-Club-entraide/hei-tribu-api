@@ -12,9 +12,6 @@ public class Page {
         if(value < 1){
             throw new BadRequestException("page must be >= to 1");
         }
-        if(value == null){
-            this.value = MIN_VALUE;
-        }
         this.value = value;
     }
 }
